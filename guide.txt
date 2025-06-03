@@ -1,0 +1,55 @@
+1. Database
+
+RESTAPI / postgresql --> 
+
+2. Define Data Model
+
+3. authentication/ auto
+
+4. business logic
+ suppy/demand
+
+5. non-functional requirements
+
+6. Testing
+
+
+entity
+------
+- category
+- customers -> user
+- rider/driver -> user
+- owner -> user
+- food/dish is attached to a Restaurant
+- Restaurant
+- payment
+
+
+
+Restaurant
+-----------
+ name -- string -- field -- 
+ image
+ address
+ categrory/type-of-meal
+ menu
+ owner/ownerId
+ orders
+ transaction
+
+
+ category
+ dishes/meals
+
+orders
+-----
+    1. id
+    2. user
+    3. Restaurant
+    4. rider
+    5. item/content/food/dish
+    6. status ()
+
+Users
+------
+1. name/email//password/role/Restaurant/payment/
