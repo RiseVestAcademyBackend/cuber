@@ -50,6 +50,83 @@ orders
     5. item/content/food/dish
     6. status ()
 
-Users
+A - Users
 ------
-1. name/email//password/role/Restaurant/payment/
+ name/email//password/role/Restaurant/payment/
+
+Actions Of The user
+1-User should be able to update their profile (email, password, role).  
+2-User should be able to delete their account.  
+3-U3ser should receive a JWT token after signup/login.  
+4-User should be prevented from accessing unauthorized resources (RBAC enforcement).  
+5-User should see their own orders (if customer) or deliveries (if delivery).  
+6-User should be verified before owning/creating restaurants (optional business verification).
+
+B- Restaurant
+------
+ name -- string -- field -- 
+ image
+ address
+ categrory/type-of-meal
+ menu
+ owner/ownerId
+ orders
+ transaction
+
+
+Action of  Restaurant
+------
+
+1-Owner should be able to update or delete their restaurant.  
+2-Owner should be able to view all orders placed for their restaurant.  
+3-Owner should only see and manage restaurants they own.  
+4-Owner should be notified when a new order is placed.  
+5-Owner should be able to mark an order as "Accepted" or "Rejected".
+
+C. Orders
+-----
+    1. id
+    2. user
+    3. Restaurant
+    4. rider
+    5. item/content/food/dish
+    6. status ()
+
+Action To Be Taken On Orders
+-----------------------
+1-Customer should be able to view their past orders.
+
+2 - Customer should be able to cancel an order if it is still pending.
+
+3- Order should progress through statuses: Pending → Accepted → PickedUp → Delivered.
+
+4- Owner should be able to change order status to "Accepted" or "Rejected".
+
+5 - Delivery person should be able to see available (Accepted) orders.
+
+6 -Delivery person should be able to pick up an order (changing status to "PickedUp").
+
+7- Delivery person should be able to mark an order as "Delivered".
+
+8 -System should prevent status changes out of order (e.g., can't deliver if not picked up).
+
+D -  Delivery
+------
+
+1- Delivery person should see only "Accepted" orders not yet picked up.  
+2-Delivery person should not pick up the same order as another driver.  
+3-Delivery person should see only the orders they are assigned to.  
+4- Delivery person should not see customer contact info until an order is picked up.
+5- Delivery person should confirm order has delivered by entering code given to client
+
+E- Bonus
+
+Security and Validation
+
+1-System should hash passwords securely using bcrypt.  
+2-System should validate all DTOs using class-validator.  
+3-System should guard all protected routes with JWT strategy.  
+4-System should only allow actions based on user roles (Owner, Customer, Delivery).
+
+
+
