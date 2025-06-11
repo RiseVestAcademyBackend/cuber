@@ -1,11 +1,12 @@
-#cuber
+# cuber
 uber-eats clone
 
-##Users
-
+## Users
+Fields 
 `name/email//password/role/Restaurant/payment/`
 
 Actions Of The user
+-----
 -User should be able to update their profile (email, password, role).   -- crud
 -User should be able to delete their account.  
 -User should receive a JWT token after signup/login.  
@@ -13,18 +14,19 @@ Actions Of The user
 -User should see their own orders (if customer) or deliveries (if delivery).  
 -User should be verified before owning/creating restaurants (optional business verification).
 
-##Restaurant
+## Restaurant
 
 Action of  Restaurant
-
-
+-----
 -Owner should be able to update or (soft) delete their restaurant.  
 -Owner should be able to view all orders placed for their restaurant.  
 -Owner should only see and manage restaurants they own.  
 -Owner should be notified when a new order is placed.  
 -Owner should be able to mark an order as "Accepted" or "Rejected".
 
-##Orders
+## Orders
+
+Fields
 -----
     1. id
     2. user
@@ -34,7 +36,7 @@ Action of  Restaurant
     6. status ()
 
 Action To Be Taken On Orders
------------------------
+-----
 -Customer should be able to view their past orders.
 -Customer should be able to cancel an order if it is still pending.
 -Order should progress through statuses: Pending → Accepted → PickedUp → Delivered.
