@@ -1,44 +1,52 @@
-import {Entity, Column, ManyToMany, OneToMany, RelationId  } from "typeorm";
-import { Field, ObjectType, InputType } from "@nestjs/graphql";
-import { Restaurant } from "src/restaurants/entities/restaurant.entity";
-import { Order } from "src/orders/entities/order.entity";
-import { IsString, IsEmail, IsEnum } from "@nestjs/class-validator";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Restaurant } from 'src/restaurants/entities/restaurant.entity';
+import { Order } from 'src/orders/entities/order.entity';
+import { IsString, IsEmail, IsEnum } from '@nestjs/class-validator';
+import { UserRole } from 'src/utility/role.enum';
 
-export enum UserRole {
-    Owner = "Owner",
-    Client = "Client",
-    Delivery = "Delivery"
-}
+registerEnumType(UserRole, {
+  name: 'UserRole',
+});
 
 @ObjectType()
 @Entity()
 export class User {
-    
-    @Column()
-    @IsString()
-    @Field(() => String)
-    name: string;
-    
-    @Column()
-    @IsEmail()
-    @Field((returns) => String)
-    email: string;
+  @PrimaryGeneratedColumn('uuid')
+  @Field(() => ID)
+  id: string;
 
-    @Column( {select: false})
-    @IsString()
-    @Field((returns) => String)
-    password: string;
-    
-    @Column()
-    @Field((type) => Restaurant, (restaurant) => restaurant.owner )
-    restaurant: Restaurant[];
+  @Column()
+  @IsString()
+  @Field(() => String)
+  name: string;
 
-    @Column()
-    @Field((type) => Order, (order) => order.customer )
-    orders: Order[]
-    
-    @Column( { type : 'enum', enum: UserRole})
-    @IsEnum(UserRole)
-    @Field((returns) => UserRole)
-    role: UserRole;
+  @Column()
+  @IsEmail()
+  @Field(() => String)
+  email: string;
+
+  @Column({ select: false })
+  @IsString()
+  password: string;
+
+  @Column({ type: 'enum', enum: UserRole })
+  @IsEnum(UserRole)
+  @Field(() => UserRole)
+  role: UserRole;
+
+  //as an owner
+  @OneToMany(() => Restaurant, (restaurant) => restaurant.owner)
+  @Field(() => [Restaurant], { nullable: true })
+  restaurants: Restaurant[];
+
+  //as a customer
+  @OneToMany(() => Order, (order) => order.customer)
+  @Field(() => [Order], { nullable: true })
+  orders: Order[];
+
+  //as a delivery person
+  @OneToMany(() => Order, (order) => order.driver)
+  @Field(() => [Order], { nullable: true })
+  deliveries: Order[];
 }
