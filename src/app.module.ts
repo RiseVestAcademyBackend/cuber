@@ -9,9 +9,10 @@ import { FoodModule } from './food/food.module';
 import { CustomersModule } from './customers/customers.module';
 import { UsersModule } from './users/users.module';
 import { DriversModule } from './drivers/drivers.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [RestaurantsModule, OrdersModule, PaymentsModule, CategoryModule, FoodModule, CustomersModule, UsersModule, DriversModule],
+  imports: [RestaurantsModule, OrdersModule, PaymentsModule, CategoryModule, FoodModule, CustomersModule, UsersModule, DriversModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
