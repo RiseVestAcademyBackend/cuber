@@ -1,6 +1,8 @@
-import {Entity, Column, ManyToMany, OneToMany, RelationId  } from "typeorm";
+import {Entity, Column, ManyToMany, OneToMany, RelationId, ManyToOne  , JoinTable} from "typeorm";
 import { Field, ObjectType, InputType } from "@nestjs/graphql";
 import { IsString, IsNumber, IsEmail } from "@nestjs/class-validator";
+import { Category } from "src/category/entities/category.entity";
+
 
 @ObjectType()
 @Entity()
@@ -31,5 +33,11 @@ export class Restaurant {
     @Field(() => [String])
     // @OneToMany((type) => String)
     orders: string; // orders
+
+    //Many restaurants can belong to many category
+    @Field(()=>[Category])
+    @ManyToMany(()=>Category, category=>category.restaurants)
+    @JoinTable()
+    categories:Category[];
  }
 

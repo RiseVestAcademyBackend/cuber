@@ -49,4 +49,5 @@ export class User {
   @OneToMany(() => Order, (order) => order.driver)
   @Field(() => [Order], { nullable: true })
   deliveries: Order[];
+
 }
