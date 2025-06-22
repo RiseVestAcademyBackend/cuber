@@ -7,6 +7,8 @@ import {
   UpdateDateColumn,
   CreateDateColumn,
   OneToMany,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { Restaurant } from 'src/restaurants/entities/restaurant.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
@@ -16,8 +18,8 @@ import { Food } from 'src/food/entities/food.entity';
 
 @Entity()
 export class Order {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({
     type: 'number',
@@ -52,6 +54,9 @@ export class Order {
   restaurant: Restaurant;
 
   // Uncomment when food entity is done
-  // @OneToMany(()=> Food, (food) => food.id)
+  // 1 Order can have many food items
+  // 1 food item can be on many orders
+  // @ManyToMany(() => Food, (food) => food.orders)
+  // @JoinTable()
   food?: Food[];
 }
