@@ -3,7 +3,7 @@ import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Restaurant } from 'src/restaurants/entities/restaurant.entity';
 import { Order } from 'src/orders/entities/order.entity';
 import { IsString, IsEmail, IsEnum } from '@nestjs/class-validator';
-import { UserRole } from 'src/utility/role.enum';
+import { UserRole } from 'src/users/enums/role.enum';
 
 registerEnumType(UserRole, {
   name: 'UserRole',
