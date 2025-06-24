@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { UserOrdersDto } from './dto/user-orders.dto';
 
 @Controller('orders')
 export class OrdersController {
@@ -31,4 +32,11 @@ export class OrdersController {
   remove(@Param('id') id: string) {
     return this.ordersService.remove(+id);
   }
+
+  @Get('history')
+  async getUserOrders(@Request() req): Promise<UserOrdersDto[]> {
+    const userId = req.user.id;
+    return this.ordersService.findUserOrders(userId);
+  }
+
 }
